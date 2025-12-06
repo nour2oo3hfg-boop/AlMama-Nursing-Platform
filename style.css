@@ -1,0 +1,307 @@
+/* تنسيقات عامة وإعدادات الخط */
+:root {
+    --color-primary: #8A2BE2; /* بنفسجي لافندر غامق */
+    --color-secondary: #E6E6FA; /* لافندر فاتح جداً */
+    --color-background: #F8F8FF; /* خلفية بيضاء مائلة للازرق الفاتح */
+    --color-text: #333;
+    --color-white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.8;
+    direction: rtl; 
+    /* مساحة احتياطية للترويسة الثابتة، تم تقليلها لتناسب الهيدر الأصغر */
+    padding-top: 80px; 
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+/* 🌟 إضافة الأشكال الباهتة في الخلفية (باستخدام CSS) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* شكل دائري باهت يمثل الأنوثة والرعاية */
+    background: radial-gradient(circle at 10% 20%, var(--color-secondary) 0%, transparent 40%),
+                radial-gradient(circle at 80% 90%, var(--color-secondary) 0%, transparent 35%);
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* ==================================== */
+/* الترويسة (Header) - الحركة الديناميكية */
+/* ==================================== */
+header {
+    background-color: var(--color-white);
+    /* تقليل الـ padding لتقليل ارتفاع الهيدر في الوضع الافتراضي */
+    padding: 10px 5%; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    /* الوضع الافتراضي (في المنتصف) */
+    position: fixed; 
+    top: 0;
+    right: 0;
+    width: 100%;
+    transition: all 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: all 0.4s ease-in-out;
+}
+
+/* ⬇️ تصغير حجم العنوان في الوضع الافتراضي */
+header h1 {
+    font-size: 2rem; 
+    color: var(--color-primary);
+    margin-right: 10px;
+    transition: font-size 0.4s ease-in-out;
+}
+
+/* ⬇️ تصغير حجم الشعار في الوضع الافتراضي */
+.logo-svg {
+    width: 30px; 
+    height: 30px;
+    transition: all 0.4s ease-in-out;
+}
+
+/* قائمة التنقل (Navigation) */
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-icon {
+    font-size: 1rem;
+    color: var(--color-text);
+    padding: 5px 10px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-icon:hover, .nav-icon.active {
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+}
+
+/* ⬆️ تنسيق الترويسة عند السحب (لأعلى) */
+.scrolled-header {
+    /* تقليل الـ padding أكثر عند السحب */
+    padding: 5px 5%; 
+    /* تحويل الترويسة إلى صف أفقي على الجانب */
+    flex-direction: row;
+    justify-content: flex-end; 
+}
+
+.scrolled-header .logo-container {
+    order: 2; /* نقل الشعار والاسم لليمين */
+}
+
+.scrolled-header nav {
+    order: 1; /* نقل الأيقونات لليسار */
+    margin-left: 20px;
+}
+
+/* تصغير إضافي للعناصر عند السحب */
+.scrolled-header .logo-container h1 {
+    font-size: 1.5rem; 
+}
+
+.scrolled-header .logo-svg {
+    width: 25px; 
+    height: 25px;
+}
+
+/* ==================================== */
+/* المحتوى الرئيسي (Main) */
+/* ==================================== */
+main {
+    padding: 30px 5%;
+    min-height: 80vh;
+    max-width: 1200px; /* زيادة العرض الكلي للصفحة */
+    margin: 0 auto;
+}
+
+main h2 {
+    /* إضافة مسافة علوية لضمان عدم تداخل النص مع الهيدر */
+    margin-top: 20px; 
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+/* ==================================== */
+/* 1. تنسيقات صفحة الكورسات (index.html) - تصغير الخانات */
+/* ==================================== */
+.course-list {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.course-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-secondary);
+    border-radius: 8px;
+    padding: 15px; /* تصغير البادينج لتقليل الحجم */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-graphic {
+    font-size: 2rem; /* تصغير حجم الجرافيك/الأيقونة */
+    margin-left: 15px;
+}
+
+.course-info h3 {
+    color: var(--color-primary);
+    margin-bottom: 3px;
+    font-size: 1.2rem;
+}
+
+.course-info p {
+    color: var(--color-text);
+    font-size: 0.85rem;
+}
+
+/* ==================================== */
+/* 2. تنسيقات صفحة عن المنصة (about.html) */
+/* ==================================== */
+.about-page .about-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.about-page p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.about-page .call-to-action {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-top: 25px;
+    padding: 10px;
+    border: 2px dashed var(--color-secondary);
+    border-radius: 8px;
+}
+
+
+/* ==================================== */
+/* 3. تنسيقات صفحة التواصل (contact.html) */
+/* ==================================== */
+.contact-page {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-secondary);
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.contact-detail .icon {
+    font-size: 1.5rem;
+    margin-left: 15px;
+    color: var(--color-primary);
+}
+
+.contact-form h3 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-secondary);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+}
+
+.contact-form button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.contact-form button:hover {
+    background-color: #6A1B9A; 
+}
+
+
+/* ==================================== */
+/* التذييل (Footer) */
+/* ==================================== */
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 10px 5%;
+    font-size: 0.85rem;
+    width: 100%;
+    position: static; 
+    margin-top: 50px;
+    z-index: 100;
+}
